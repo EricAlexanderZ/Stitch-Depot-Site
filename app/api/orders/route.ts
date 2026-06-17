@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { sendOrderConfirmation, sendAdminNewOrderAlert } from "@/lib/email";
 
 type OrderPayload = {
@@ -21,13 +21,13 @@ export async function POST(request: NextRequest) {
   const body: OrderPayload = await request.json();
 
   // Generate readable order number: SD1001, SD1002, …
-  const { count } = await supabaseAdmin
+  const { count } = await getSupabaseAdmin()
     .from("orders")
     .select("*", { count: "exact", head: true });
 
   const orderNumber = `SD${1001 + (count ?? 0)}`;
 
-  const { data: order, error } = await supabaseAdmin
+  const { data: order, error } = await getSupabaseAdmin()
     .from("orders")
     .insert({
       order_number:  orderNumber,

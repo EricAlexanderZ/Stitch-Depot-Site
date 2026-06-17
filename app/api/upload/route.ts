@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 const ALLOWED_TYPES = new Set([
   "image/png", "image/jpeg", "image/jpg", "image/webp",
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
   const bytes  = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const { error } = await supabaseAdmin.storage
+  const { error } = await getSupabaseAdmin().storage
     .from(bucket)
     .upload(path, buffer, { contentType: file.type });
 
@@ -37,6 +37,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  const { data } = supabaseAdmin.storage.from(bucket).getPublicUrl(path);
+  const { data } = getSupabaseAdmin().storage.from(bucket).getPublicUrl(path);
   return NextResponse.json({ url: data.publicUrl });
 }

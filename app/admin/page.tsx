@@ -1,7 +1,7 @@
 ﻿import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import AdminLogout from "./logout";
 
 type Order = {
@@ -37,7 +37,7 @@ export default async function AdminPage() {
     redirect("/admin/login");
   }
 
-  const { data: orders } = await supabaseAdmin
+  const { data: orders } = await getSupabaseAdmin()
     .from("orders")
     .select("id, created_at, order_number, customer_name, customer_email, hat_style, hat_color, quantity, total, status")
     .order("created_at", { ascending: false });

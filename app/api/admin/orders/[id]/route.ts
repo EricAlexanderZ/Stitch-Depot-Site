@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 async function checkAuth() {
   const cookieStore = await cookies();
@@ -17,7 +17,7 @@ export async function GET(
 
   const { id } = await params;
 
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from("orders")
     .select("*")
     .eq("id", id)
@@ -45,7 +45,7 @@ export async function PATCH(
   if (status) updates.status = status;
   if (notes !== undefined) updates.notes = notes;
 
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from("orders")
     .update(updates)
     .eq("id", id)
