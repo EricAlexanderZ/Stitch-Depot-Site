@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stitch Depot, Website Proposal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #f4f6fb;
+      color: #000d2b;
+    }
+
+    /* ── PDF Button ── */
+    .pdf-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #0151fc;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 24px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(1,81,252,0.4);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pdf-btn:hover { background: #0040d0; }
+
+    /* ── Header ── */
+    .header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header-logo svg { height: 34px; width: auto; }
+    .header-meta { text-align: right; color: #4a5568; font-size: 13px; line-height: 1.8; }
+    .header-meta strong { color: #000d2b; font-size: 15px; display: block; }
+
+    /* ── Hero Banner ── */
+    .hero {
+      background: linear-gradient(135deg, #000d2b 0%, #0a1f5c 60%, #0151fc 100%);
+      padding: 64px 48px;
+      text-align: center;
+      color: #fff;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(1,81,252,0.3);
+      border: 1px solid rgba(1,81,252,0.6);
+      color: #a0b8ff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    .hero h1 span { color: #5b8fff; }
+    .hero p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Layout ── */
+    .container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 56px 0; }
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #0151fc;
+      margin-bottom: 10px;
+    }
+    .section-heading {
+      font-size: 28px;
+      font-weight: 800;
+      color: #000d2b;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .section-sub {
+      font-size: 15px;
+      color: #4a5568;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid #e2e8f0; margin: 0; }
+
+    /* ── Features Grid ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .feature-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: #eef3ff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #000d2b; }
+    .feature-card p { font-size: 14px; color: #5a6a7e; line-height: 1.65; }
+
+    /* ── Highlight Box ── */
+    .highlight-box {
+      background: linear-gradient(135deg, #000d2b, #0a1f5c);
+      border-radius: 20px;
+      padding: 40px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .highlight-box-text { flex: 1; min-width: 240px; }
+    .highlight-box-text h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+    .highlight-box-text p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+    .highlight-stats { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
+    .stat { text-align: center; }
+    .stat-value { font-size: 36px; font-weight: 900; color: #5b8fff; line-height: 1; }
+    .stat-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── Timeline ── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: #e2e8f0;
+    }
+    .timeline-item { position: relative; margin-bottom: 36px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -27px;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      background: #0151fc;
+      border-radius: 50%;
+      border: 3px solid #f4f6fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .timeline-week {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #0151fc;
+      margin-bottom: 4px;
+    }
+    .timeline-item h3 { font-size: 17px; font-weight: 700; color: #000d2b; margin-bottom: 10px; }
+    .timeline-item ul { list-style: none; padding: 0; }
+    .timeline-item ul li {
+      font-size: 14px;
+      color: #5a6a7e;
+      padding: 4px 0 4px 20px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .timeline-item ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #0151fc;
+      font-size: 12px;
+    }
+
+    /* ── Pricing ── */
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .pricing-card {
+      background: #fff;
+      border: 2px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 36px;
+    }
+    .pricing-card.featured {
+      border-color: #0151fc;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card.featured::before {
+      content: 'PROJECT INVESTMENT';
+      position: absolute;
+      top: 18px;
+      right: -30px;
+      background: #0151fc;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 5px 44px;
+      transform: rotate(45deg);
+    }
+    .pricing-label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #0151fc; margin-bottom: 12px; }
+    .pricing-amount { font-size: 52px; font-weight: 900; color: #000d2b; line-height: 1; letter-spacing: -2px; }
+    .pricing-amount span { font-size: 24px; font-weight: 600; vertical-align: top; margin-top: 8px; display: inline-block; letter-spacing: 0; }
+    .pricing-sub { font-size: 13px; color: #7a8a9e; margin-top: 6px; margin-bottom: 24px; }
+    .pricing-divider { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+    .pricing-list { list-style: none; padding: 0; }
+    .pricing-list li {
+      font-size: 14px;
+      color: #4a5568;
+      padding: 7px 0 7px 24px;
+      position: relative;
+      line-height: 1.5;
+      border-bottom: 1px solid #f0f4f8;
+    }
+    .pricing-list li:last-child { border-bottom: none; }
+    .pricing-list li::before { content: '✓'; position: absolute; left: 0; color: #0151fc; font-weight: 700; }
+    .payment-note {
+      margin-top: 20px;
+      background: #f0f4ff;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #2d3a5e;
+      line-height: 1.7;
+    }
+    .payment-note strong { color: #0151fc; }
+
+    /* ── Maintenance ── */
+    .maintenance-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 40px;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .maintenance-left { flex: 1; min-width: 200px; }
+    .maintenance-price { font-size: 48px; font-weight: 900; color: #000d2b; line-height: 1; letter-spacing: -2px; }
+    .maintenance-price span { font-size: 20px; font-weight: 600; letter-spacing: 0; }
+    .maintenance-per { font-size: 13px; color: #7a8a9e; margin-top: 4px; margin-bottom: 16px; }
+    .maintenance-badge {
+      display: inline-block;
+      background: #f0f4ff;
+      color: #0151fc;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+    }
+    .maintenance-right { flex: 2; min-width: 240px; }
+    .maintenance-right h4 { font-size: 15px; font-weight: 700; color: #000d2b; margin-bottom: 14px; }
+    .maintenance-list { list-style: none; padding: 0; columns: 2; gap: 12px; }
+    .maintenance-list li {
+      font-size: 14px;
+      color: #4a5568;
+      padding: 5px 0 5px 20px;
+      position: relative;
+      break-inside: avoid;
+    }
+    .maintenance-list li::before { content: '✓'; position: absolute; left: 0; color: #0151fc; font-weight: 700; font-size: 12px; }
+    .maintenance-note { margin-top: 20px; font-size: 13px; color: #7a8a9e; font-style: italic; line-height: 1.6; }
+
+    /* ── Signature ── */
+    .signature-section {
+      background: #000d2b;
+      padding: 56px 48px;
+      text-align: center;
+      color: #fff;
+    }
+    .signature-section p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 4px; }
+    .signature-section strong { color: #fff; }
+
+
+    /* ── Mobile ── */
+    @media (max-width: 720px) {
+      .header { padding: 20px 24px; }
+      .header-logo svg { height: 28px; }
+      .header-meta { text-align: left; font-size: 12px; }
+      .hero { padding: 48px 24px; }
+      .hero h1 { font-size: 30px; letter-spacing: -0.5px; }
+      .hero p { font-size: 15px; }
+      .container { padding: 0 20px; }
+      .section { padding: 40px 0; }
+      .section-heading { font-size: 24px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .maintenance-list { columns: 1; }
+      .maintenance-card { padding: 28px; gap: 28px; }
+      .highlight-box { padding: 28px; gap: 28px; }
+      .signature-section { padding: 40px 24px; }
+      .timeline { padding-left: 28px; }
+      .pdf-btn { bottom: 20px; right: 20px; font-size: 13px; padding: 12px 20px; }
+    }
+
+    /* ── Print / PDF ── */
+    @media print {
+      @page { margin: 14mm 14mm; size: A4; }
+
+      body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      .pdf-btn { display: none !important; }
+      a[href*="squareup"] {
+        background: #0151fc !important;
+        color: #fff !important;
+        border-radius: 100px !important;
+        padding: 12px 20px !important;
+        font-size: 13px !important;
+        text-decoration: none !important;
+        display: flex !important;
+      }
+
+      .header { padding: 16px 24px; border-bottom: 1px solid #e2e8f0; }
+      .hero { padding: 36px 32px; }
+      .hero h1 { font-size: 32px; }
+      .container { padding: 0 24px; max-width: 100%; }
+      .section { padding: 32px 0; }
+      .section-heading { font-size: 22px; }
+
+      .features-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .feature-card { padding: 16px; border-radius: 10px; break-inside: avoid; }
+      .feature-icon { width: 36px; height: 36px; font-size: 16px; margin-bottom: 10px; }
+
+      .highlight-box { padding: 24px; border-radius: 12px; break-inside: avoid; }
+      .highlight-stats { gap: 20px; }
+      .stat-value { font-size: 28px; }
+
+      .timeline-item { break-inside: avoid; margin-bottom: 24px; }
+      .timeline::before { display: none; }
+      .timeline-dot { left: -26px; }
+
+      .pricing-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .pricing-card { padding: 24px; break-inside: avoid; }
+      .pricing-card.featured::before { display: none; }
+      .pricing-amount { font-size: 40px; }
+
+      .maintenance-card { padding: 24px; gap: 24px; break-inside: avoid; }
+      .maintenance-list { columns: 2; }
+
+      .signature-section { padding: 36px 24px; break-inside: avoid; }
+
+      .divider { margin: 0; }
+      hr.divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PDF Download Button -->
+  <button class="pdf-btn" onclick="window.print()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Save as PDF
+  </button>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-logo">
+      <svg viewBox="0 0 1448 260" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="34">
+        <defs>
+          <style>.h1{fill:url(#hg1)}.h2{fill:#0151fc}.h3{fill:url(#hg3)}.h4{fill:url(#hg4)}.h5{fill:url(#hg5)}.h6{fill:#000d2b}</style>
+          <linearGradient id="hg5" x1="165.41" y1="96.75" x2="489.98" y2="96.75" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#f9f9fa"/><stop offset=".05" stop-color="#cacdd3"/><stop offset=".1" stop-color="#9fa4af"/><stop offset=".15" stop-color="#797f8f"/><stop offset=".2" stop-color="#586074"/><stop offset=".26" stop-color="#3c465d"/><stop offset=".33" stop-color="#26314a"/><stop offset=".41" stop-color="#14203c"/><stop offset=".51" stop-color="#081532"/><stop offset=".65" stop-color="#010e2c"/><stop offset="1" stop-color="#000d2b"/>
+          </linearGradient>
+          <linearGradient id="hg1" x1="67.5" y1="205.97" x2="208.66" y2="205.97" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#e2e8f0"/><stop offset=".88" stop-color="#0151fc"/>
+          </linearGradient>
+          <linearGradient id="hg4" x1="78.5" y1="176.55" x2="219.66" y2="176.55" xlink:href="#hg1"/>
+          <linearGradient id="hg3" x1="90.83" y1="147.13" x2="232" y2="147.13" xlink:href="#hg1"/>
+        </defs>
+        <g>
+          <g>
+            <path class="h5" d="M316.45,94.03l-33.88,73.99-46.6-.31,46.96-104.9-117.52-.22,46.77-37.08,277.8.04-36.56,37.09-114.16.03c-5.59-.47-10.05,2.57-12.22,7.45l-10.6,23.93Z"/>
+            <path class="h2" d="M389.66,213.76h-173.56s13.96-32.31,13.96-32.31h155.01c4.45,0,8.96-1.43,10.46-5.85l4-11.77c.36-1.06.09-4.27-.91-4.77l-4.41-2.18h-55.02c-7.6-.46-15.31-2.76-19.84-9-4.87-6.71-4.99-15.83-2.21-23.54l7.14-19.76c6.16-17.04,19.44-28.53,38.09-29.87l118.63.13-32.67,30.87-82.16.04c-4.03,0-8.47,1.4-9.83,5.46l-3.74,11.16c-.86,2.56,2.04,5.36,4.62,5.37l58.84.26c6.66.03,13.96,3.4,17.76,8.41,5.23,6.9,5.82,16.2,2.95,23.99l-9.99,27.17c-5.7,15.51-19.92,25.22-37.13,26.19Z"/>
+          </g>
+          <g>
+            <path class="h6" d="M858.42,103.47c10.34.04,18.37,9.12,16.11,19.18l-10.43,46.45c-2.52,11.23-12.14,19.74-24.11,19.75l-55.57.05c-6.37,0-11.81-6.3-10.34-12.9l23.37-104.96,15.31.33c1.15.02,3.26,1.39,3.81,2.24.66,1.03.7,3.85.4,5.25l-6.2,29.26c4.29-2.67,8.1-4.8,12.6-4.78l35.07.13ZM844.61,163.16l7.5-35.04c.58-3.52-1.77-6.47-5.34-6.47l-39.27-.07-9.9,44.16c-.18.79-.12,2.68.06,3.43s2.28,1.52,3.33,1.52l34.6-.03c4.3,0,8.04-2.9,9.02-7.5Z"/>
+            <path class="h6" d="M943.48,188.72h-51.9c-8.81,0-16.21-8.85-14.28-17.59l10.64-48.2c2.43-11.01,12.81-19.47,24.35-19.48l48.64-.06c4.87,0,10.04,3.15,12.51,6.15,3.33,4.04,4.44,9.88,3.24,15.08l-10.71,46.42c-2.24,9.71-12.22,17.68-22.49,17.68ZM939.2,170.7c5.26-1.1,7.22-4.94,8.21-9.44l7.27-33.06c.82-3.7-2.65-6.6-5.83-6.6l-32.33.07c-4.13,0-7.88,2.93-8.81,7.04l-7.96,35.46c-.68,3.02,1.89,6.44,4.95,6.45l34.49.07Z"/>
+            <path class="h6" d="M560.32,183.6c-1.22,5.36-7.33,5.64-10.96,5.57-5.48-.1-9.42.31-14.02-3.21l21.58-94.06-42.54-.23,12.44-17.76c1.26-1.8,6.07-3.21,8.36-3.21h92.13s-9.9,15.74-9.9,15.74c-1.49,3.1-4.6,5.12-8.14,5.17l-28.01.34-20.92,91.65Z"/>
+            <path class="h6" d="M705.77,104.73l-19.14,84.17-15.75.2c-1.78.02-3.86-2.73-4.13-4.67-3.34,2.03-8.16,4.55-12.59,4.53l-36.76-.18c-9.96-.05-16.9-9.39-14.68-19.36l14.71-65.95,13.96-.26c1.73-.03,4.93,1.73,6.85,3.18l-13.17,57.77c.19,1.55.5,3.64,1.02,4.56.62,1.1,3.54,1.91,5.01,1.91l38.58.04,15.05-67.13c6.83-.53,13.1-.74,21.04,1.18Z"/>
+            <path class="h6" d="M745.7,121.6c-2.7,0-7.36,2.19-8.01,5.05l-14,62.34-21.7-.06,15.6-68.37c2.26-9.91,11.58-17.14,21.6-17.18l41.31-.14-4.32,13.01c-.85,2.55-3.97,5.33-6.82,5.34l-23.67.02Z"/>
+            <g>
+              <path class="h2" d="M1061.67,188.51l-83.08.21,11.56-17.55c1.01-1.53,5.04-2.76,6.95-2.76l59.62-.06c3.77,0,6.58-3.83,7.29-6.94l3.36-14.82c.75-3.31-1.47-7.02-5.35-7.05l-47.55-.28c-5.47-.03-11.02-3.14-13.88-6.27-3.86-4.23-5.33-10.28-4.12-15.87l5.26-24.24c2.53-11.65,12.92-21.77,25.73-21.81l77.37-.25-8.83,15.22c-1.07,1.84-4.12,5.68-6.71,5.68l-56.17-.02c-3.34,0-7.76,2.13-8.63,5.46l-3.74,14.39c-.33,1.28.2,4.41.99,5.44.9,1.17,3.74,2.61,5.46,2.62l48.79.37c10.52.08,18.42,10.09,16.17,19.98l-6.7,29.43c-2.3,10.07-12.24,19.09-23.79,19.11Z"/>
+              <path class="h2" d="M1225.13,171.57l46.16-.13c2.49,0,4.67,2.99,3.98,5.15l-3.94,12.27-59.01-.31c-10.13-.05-17.29-9.75-15.26-19.23l9.54-44.43c2.41-11.21,11.28-21.15,23.64-21.12l44.75.1c9.58.02,17.01,9.17,15.07,18.1l-3.74,17.22c-1.93,8.9-10.63,15.69-20.16,15.7l-46.23.06-1.98,10.39c-.81,4.25,3.63,6.25,7.17,6.24ZM1263.24,140.66c6.45-3.61,7.92-19.44,3.23-19.56l-31.35-.8c-4.04-.1-8,2.94-8.77,6.72l-2.94,14.25,39.83-.62Z"/>
+              <path class="h2" d="M1351.5,188.37l-63.75.36,9.39-14.91c1.63-2.59,7.73-1.56,10.63-1.57l38.57-.15c5.84-.02,8.94-18.01,4.17-18.09l-38.25-.62c-8.07-.13-14.6-7.47-13.3-15.14l2.31-13.6c1.81-10.7,9.9-20.86,21.98-20.9l57.25-.17-5.94,11.84c-1.94,3.88-4.97,5.28-9.4,5.27l-38.93-.13c-5.06-.02-8.91,12.83-4.71,17.05l37.38.53c4.04.06,9.06,2.35,11.32,4.69,3.14,3.25,4.47,8.82,3.48,13.23l-3.59,16.01c-1.76,7.84-9.04,16.26-18.61,16.32Z"/>
+              <path class="h2" d="M1181.96,170.66c2.22.03,5.6,3.35,5.09,5.18l-3.61,12.92-27.02-.4c-9.91-.15-15.59-9.85-13.52-19.12l10.84-48.55-9.41-.21,4.6-16.8,8.85-.17,4.45-21.91,14.13-.19c1.94-.03,5.85,2.65,5.5,4.42l-3.51,17.6,24.16.18-4.12,13.74c-.44,1.47-3.3,3.5-4.9,3.49l-18.89-.13-9.38,42.22c-.33,1.47-.75,3.81-.37,4.87.44,1.23,3.11,2.68,4.42,2.7l12.71.16Z"/>
+              <path class="h2" d="M1118.17,188.67l-16.73.11c-1.09,0-3.45-1.48-3.65-2.39s-.08-2.85.22-4.15l17.59-78.35,16.03.13c1.06,0,3.03,1.22,3.64,1.92.6.71.8,3.19.56,4.25l-17.67,78.48Z"/>
+              <path class="h2" d="M1140.17,91.6l-21.98-.07,4.44-20.16,17.04-.14c.86,0,2.88,1.16,3.32,1.89.54.92.33,3.33.04,4.4l-2.86,14.08Z"/>
+            </g>
+          </g>
+        </g>
+        <polygon class="h1" points="201.09 214.51 208.66 197.43 67.5 205.97 201.09 214.51"/>
+        <polygon class="h4" points="212.09 185.09 219.66 168.01 78.5 176.55 212.09 185.09"/>
+        <polygon class="h3" points="224.42 155.67 232 138.59 90.83 147.13 224.42 155.67"/>
+      </svg>
+    </div>
+    <div class="header-meta">
+      <strong>Website Proposal</strong>
+      Prepared for: Stitch Depot<br>
+      Date: June 2026
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">Custom Website Proposal</div>
+    <h1>A Website Built to <span>Sell Your Hats</span></h1>
+    <p>A fully custom, professional ordering experience that makes it easy for customers to browse your products, build their order, and buy, all in one place.</p>
+  </div>
+
+  <!-- What You Get -->
+  <div class="container">
+    <div class="section">
+      <div class="section-title">What's Included</div>
+      <div class="section-heading">Everything Your Business Needs Online</div>
+      <div class="section-sub">No templates. No page builders. A custom-built website designed specifically for Stitch Depot, the way you want it.</div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🧢</div>
+          <h3>Custom Product Configurator</h3>
+          <p>Customers pick their hat style, color, embroidery placement, and quantity, all on one page. Pricing updates live so they always know exactly what they're spending. Built to grow with you as you add more hat styles.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛒</div>
+          <h3>Full Online Ordering &amp; Checkout</h3>
+          <p>Customers can build a complete order, hats, polos, hoodies, add it to a cart, enter their shipping info, and pay securely with a credit card. No back-and-forth DMs needed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📁</div>
+          <h3>Artwork Upload</h3>
+          <p>After checkout, customers upload their logo or design file directly on the site. No more chasing files over email or text. Accepted formats: PNG, JPG, PDF, and AI files.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👤</div>
+          <h3>Customer Accounts</h3>
+          <p>Customers can create an account, log back in, and view their order history, saved artwork, and saved addresses. Makes repeat orders faster and keeps everything organized for them.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Admin Dashboard</h3>
+          <p>You get a private admin panel to manage every order. See what was ordered, upload the digital proof for customer approval, update order status, and keep a full history. Everything in one place, no spreadsheets needed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✉️</div>
+          <h3>Automatic Email Notifications</h3>
+          <p>Customers get an order confirmation the moment they check out. You get an alert for every new order. When you upload a proof, the customer gets notified automatically. All hands-free.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3>Live Shipping Rates</h3>
+          <p>Real shipping costs are calculated automatically based on the customer's location and order size. No guessing, no flat rates, just accurate pricing pulled in real time at checkout.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Works on Every Device</h3>
+          <p>The entire site, from product browsing to checkout, is fully optimized for mobile phones, tablets, and desktops. Your customers can place an order from anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Why It Matters -->
+  <div style="background:#fff; padding:0;">
+    <div class="container">
+      <div class="section">
+        <div class="section-title">The Opportunity</div>
+        <div class="section-heading">Turn Inquiries Into Orders, Automatically</div>
+        <div class="section-sub">Right now, every order starts with a conversation. A website built the right way changes that, customers self-serve, and you wake up to confirmed orders in your inbox.</div>
+
+        <div class="highlight-box">
+          <div class="highlight-box-text">
+            <h3>Built to Scale With Your Business</h3>
+            <p>The site is built on a flexible foundation. Adding a new hat style, a new product line, or a new color? It's as simple as adding it to the list, no redesign required. As Stitch Depot grows, the website grows with it.</p>
+          </div>
+          <div class="highlight-stats">
+            <div class="stat">
+              <div class="stat-value">3</div>
+              <div class="stat-label">Product Lines<br>at Launch</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">∞</div>
+              <div class="stat-label">Styles You<br>Can Add</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">24/7</div>
+              <div class="stat-label">Orders Taken<br>Automatically</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Timeline -->
+  <div class="container">
+    <div class="section">
+      <div class="section-title">Project Timeline</div>
+      <div class="section-heading">Live in 3 Weeks</div>
+      <div class="section-sub">Here's exactly what happens from the day we start to the day your site goes live.</div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-week">Week 1, Days 1–7</div>
+          <h3>Design &amp; Foundation</h3>
+          <ul>
+            <li>Kickoff call, we nail down your colors, products, pricing, and any specific requests</li>
+            <li>Full site design created based on your brand</li>
+            <li>Home page, navigation, and footer built out</li>
+            <li>Product pages structured with your hat styles, colors, and real photos</li>
+            <li>First preview shared with you for feedback by end of week</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-week">Week 2, Days 8–14</div>
+          <h3>Ordering System &amp; Checkout</h3>
+          <ul>
+            <li>Full cart and checkout flow built and connected</li>
+            <li>Stripe payment processing integrated and tested</li>
+            <li>Live shipping rate calculator connected</li>
+            <li>Artwork upload system set up</li>
+            <li>Order confirmation emails configured for you and your customers</li>
+            <li>Customer account system (sign up, log in, order history) built out</li>
+            <li>Second preview shared, full walkthrough of the ordering experience</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-week">Week 3, Days 15–21</div>
+          <h3>Admin, Polish &amp; Launch</h3>
+          <ul>
+            <li>Admin dashboard built, manage orders, upload proofs, update statuses</li>
+            <li>Full mobile testing across iPhone and Android</li>
+            <li>Speed and performance optimization</li>
+            <li>Final revisions based on your feedback</li>
+            <li>Domain connected, site deployed, and handed off to you</li>
+            <li>Walkthrough call so you know exactly how to use the admin panel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Pricing -->
+  <div style="background:#fff; padding:0;">
+    <div class="container">
+      <div class="section">
+        <div class="section-title">Investment</div>
+        <div class="section-heading">Simple, Transparent Pricing</div>
+        <div class="section-sub">One flat project fee, no hidden costs, no hourly billing, no surprises.</div>
+
+        <div class="pricing-grid">
+          <div class="pricing-card featured">
+            <div class="pricing-label">Full Website Build</div>
+            <div class="pricing-amount"><span>$</span>2,500</div>
+            <div class="pricing-sub">One-time project fee</div>
+            <hr class="pricing-divider" />
+            <ul class="pricing-list">
+              <li>Full custom design, no templates</li>
+              <li>Product configurator (hats, polos, hoodies)</li>
+              <li>Cart, checkout &amp; Stripe payments</li>
+              <li>Customer accounts &amp; order history</li>
+              <li>Artwork upload system</li>
+              <li>Admin dashboard &amp; order management</li>
+              <li>Automated email notifications</li>
+              <li>Live shipping rates at checkout</li>
+              <li>Mobile-optimized on all devices</li>
+              <li>Domain setup &amp; deployment</li>
+              <li>Walkthrough &amp; handoff call</li>
+            </ul>
+            <div class="payment-note">
+              <strong>50% due to start ($1,250)</strong>, secures your project start date and kicks off Week 1.<br><br>
+              <strong>50% due on launch ($1,250)</strong>, collected when the site goes live.
+            </div>
+            <a href="https://app.squareup.com/pay-invoice/invtmp:6c8296ea-e56b-4fb0-b080-91c62e40a1c9" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:20px; background:#0151fc; color:#fff; font-size:15px; font-weight:700; padding:16px 24px; border-radius:100px; text-decoration:none; transition:background 0.2s;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Pay Deposit — $1,353.13
+            </a>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-label">What's Not Included</div>
+            <div style="font-size:14px; color:#4a5568; line-height:1.8; margin-top:8px;">
+              <p style="margin-bottom:12px;">The following are separate costs paid directly to the service providers, not to TurboSites:</p>
+              <ul class="pricing-list">
+                <li>Domain name (~$12–15/yr via Namecheap or GoDaddy)</li>
+                <li>Hosting (~$20–30/mo via Vercel or similar)</li>
+                <li>Stripe processing fees (2.9% + 30¢ per transaction, industry standard)</li>
+                <li>Shipping API (Shippo free tier covers most small businesses)</li>
+                <li>Product photography (if new photos are needed)</li>
+              </ul>
+              <p style="margin-top:16px; color:#7a8a9e; font-size:13px;">These are standard costs for any professional website. I'll help you get everything set up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Maintenance -->
+  <div class="container">
+    <div class="section">
+      <div class="section-title">Optional Add-On</div>
+      <div class="section-heading">Monthly Maintenance Plan</div>
+      <div class="section-sub">Keep your site running smoothly, up to date, and supported, without having to think about it.</div>
+
+      <div class="maintenance-card">
+        <div class="maintenance-left">
+          <div class="maintenance-price"><span>$</span>150</div>
+          <div class="maintenance-per">per month</div>
+          <div class="maintenance-badge">Cancel anytime</div>
+          <p style="margin-top:20px; font-size:13px; color:#5a6a7e; line-height:1.7;">Recommended for any business that wants to keep their site growing without managing it themselves.</p>
+        </div>
+        <div class="maintenance-right">
+          <h4>What's covered every month:</h4>
+          <ul class="maintenance-list">
+            <li>Software &amp; security updates</li>
+            <li>Uptime monitoring</li>
+            <li>Bug fixes &amp; error corrections</li>
+            <li>Content updates (prices, products, copy)</li>
+            <li>New product or color additions</li>
+            <li>Performance monitoring</li>
+            <li>Monthly backup</li>
+            <li>Priority support via text/email</li>
+            <li>Up to 2 hours of changes/month</li>
+            <li>Additional hours billed at $75/hr</li>
+          </ul>
+          <p class="maintenance-note">This plan is optional and can be added at any time, even months after launch. It's simply the easiest way to make sure your website stays healthy and up to date without you having to manage it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Signature -->
+  <div class="signature-section">
+    <p>Prepared by <strong><a href="https://turbosites.io" style="color:#fff; text-decoration:underline;">TurboSites</a></strong> &nbsp;·&nbsp; eric@turbosites.io</p>
+    <p>This proposal is valid for <strong>30 days</strong> from the date above.</p>
+
+    <p style="margin-top:32px; font-size:13px; color:rgba(255,255,255,0.35);">© 2026 TurboSites. All rights reserved. &nbsp;·&nbsp; <a href="https://turbosites.io" style="color:rgba(255,255,255,0.5); text-decoration:underline;">turbosites.io</a></p>
+  </div>
+
+</body>
+</html>
