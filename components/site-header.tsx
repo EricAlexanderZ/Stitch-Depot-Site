@@ -13,10 +13,10 @@ export function TopBanner() { return null; }
 function MobileDrawer({ onClose }: { onClose: () => void }) {
   return (
     <>
-      <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+      <div className="fixed inset-0 z-40 bg-black/60" onClick={onClose} />
       <div className="drawer-slide-in fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col bg-[#111111] shadow-2xl">
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-          <Image src="/images/home/STITCH_DEPOT_LOGO.png" alt="Stitch Depot" height={36} width={36} className="object-contain" />
+          <span className="font-extrabold text-[#F0F0F0]">Stitch Depot</span>
           <button type="button" onClick={onClose} className="text-lg text-[#A8B4BC]/60" aria-label="Close menu">
             &#x2715;
           </button>
@@ -31,9 +31,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
                 onClick={onClose}
                 className="flex items-center gap-3 rounded-2xl p-3 transition hover:bg-[#0C2340]"
               >
-                <div className="relative h-10 w-10 shrink-0">
-                  <Image src={item.image} alt={item.name} fill className="object-contain" />
-                </div>
+                <span className="text-xl">🧢</span>
                 <span className="font-semibold text-[#F0F0F0]">{item.name}</span>
               </Link>
             ))}
