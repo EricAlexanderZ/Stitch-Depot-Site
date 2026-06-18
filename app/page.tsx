@@ -15,9 +15,8 @@ export default function Home() {
       <SiteHeader />
 
       <section className="relative overflow-hidden">
-        <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover md:hidden" src="/images/home/embroideryVid.mp4" />
-        <div className="absolute inset-0 hidden bg-cover bg-center md:block" style={{ backgroundImage: "url('/images/home/DESKTOP_HERO_BG.png')" }} />
-        <div className="absolute inset-0 hidden bg-black/70 md:block" />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/home/DESKTOP_HERO_BG.png')" }} />
+        <div className="absolute inset-0 bg-black/70" />
 
         <div className="relative mx-auto min-h-[560px] max-w-7xl px-6 pt-0 pb-0 lg:py-20 flex items-center justify-between gap-4 lg:gap-10">
           <div className="w-full text-center lg:max-w-2xl lg:text-left">
