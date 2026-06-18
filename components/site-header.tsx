@@ -20,7 +20,7 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
       <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={onClose} />
       <div className="drawer-slide-in fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col bg-[#111111] shadow-2xl">
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-          <Image src="/images/home/stitch_depot_logo.png" alt="Stitch Depot" height={36} width={36} className="object-contain" />
+          <Image src="/images/home/STITCH_DEPOT_LOGO.png" alt="Stitch Depot" height={36} width={36} className="object-contain" />
           <button type="button" onClick={onClose} className="text-lg text-[#A8B4BC]/60" aria-label="Close menu">
             &#x2715;
           </button>
@@ -97,7 +97,7 @@ export function SiteHeader() {
       {/* Mobile */}
       <div className="flex items-center justify-between px-4 py-4 md:hidden">
         <Link href="/">
-          <Image src="/images/home/stitch_depot_logo.png" alt="Stitch Depot" height={52} width={52} className="object-contain" />
+          <Image src="/images/home/STITCH_DEPOT_LOGO.png" alt="Stitch Depot" height={52} width={52} className="object-contain" />
         </Link>
         <div className="flex items-center gap-3">
           <Link href="/contact" aria-label="Account" className="text-[#F0F0F0]/60 transition hover:text-[#F0F0F0]">
@@ -125,7 +125,7 @@ export function SiteHeader() {
       {/* Desktop */}
       <div className="mx-auto hidden max-w-7xl items-center justify-between px-6 py-4 md:flex">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/images/home/stitch_depot_logo.png" alt="Stitch Depot" height={60} width={60} className="object-contain" />
+          <Image src="/images/home/STITCH_DEPOT_LOGO.png" alt="Stitch Depot" height={60} width={60} className="object-contain" />
         </Link>
 
         <nav className="flex items-center gap-8">

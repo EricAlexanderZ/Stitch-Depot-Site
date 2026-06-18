@@ -44,7 +44,7 @@ export default function HeroLogo() {
           >
             <div className="flex items-center justify-center" style={{ width: 500, height: 500 }}>
               <Image
-                src="/images/home/stitch_depot_logo.png"
+                src="/images/home/STITCH_DEPOT_LOGO.png"
                 alt="Stitch Depot"
                 width={440}
                 height={440}
