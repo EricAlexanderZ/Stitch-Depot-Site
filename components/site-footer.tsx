@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-3">
-              <Image src="/images/home/stitch_depot_logo.png" alt="Stitch Depot" width={48} height={48} className="object-contain" />
+              <Image src="/images/home/STITCH_DEPOT_LOGO.png" alt="Stitch Depot" width={48} height={48} className="object-contain" />
               <div>
                 <p className="text-xl font-extrabold">Stitch Depot</p>
                 <p className="mt-1 text-xs text-white/50">Premium embroidered hats for brands &amp; teams</p>
