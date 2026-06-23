@@ -54,7 +54,6 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
 export function SiteHeader() {
   const [menuOpen,      setMenuOpen]      = useState(false);
   const [bannerIndex,   setBannerIndex]   = useState(0);
-  const [bannerKey,     setBannerKey]     = useState(0);
   const [bannerExiting, setBannerExiting] = useState(false);
   const swapRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { total } = useCart();
@@ -64,7 +63,6 @@ export function SiteHeader() {
       setBannerExiting(true);
       swapRef.current = setTimeout(() => {
         setBannerIndex((i) => (i + 1) % BANNER_MESSAGES.length);
-        setBannerKey((k) => k + 1);
         setBannerExiting(false);
       }, 350);
     }, 4500);
@@ -80,9 +78,8 @@ export function SiteHeader() {
       {/* Rotating banner */}
       <div className="overflow-hidden bg-gradient-to-r from-[#0C2340] via-[#7AB3D4] to-[#0C2340] px-4 py-2 text-center text-xs font-semibold text-white sm:text-sm">
         <span
-          key={bannerKey}
-          className="banner-slide-in inline-block"
-          style={bannerExiting ? { opacity: 0, transform: "translateY(-8px)", transition: "opacity 0.3s ease, transform 0.3s ease" } : undefined}
+          className="inline-block"
+          style={{ opacity: bannerExiting ? 0 : 1, transition: "opacity 0.35s ease" }}
         >
           {BANNER_MESSAGES[bannerIndex]}
         </span>
