@@ -41,9 +41,9 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
             ))}
           </div>
           <div className="mt-6 space-y-1 border-t border-white/10 pt-5">
-            <Link href="/about"   onClick={onClose} className="block rounded-2xl p-3 text-sm font-semibold text-[#F0F0F0] transition hover:bg-[#0C2340]">Our Story</Link>
-            <Link href="/contact" onClick={onClose} className="block rounded-2xl p-3 text-sm font-semibold text-[#F0F0F0] transition hover:bg-[#0C2340]">Contact</Link>
-            <Link href="/faq"     onClick={onClose} className="block rounded-2xl p-3 text-sm font-semibold text-[#F0F0F0] transition hover:bg-[#0C2340]">FAQ</Link>
+            <Link prefetch={false} href="/about"   onClick={onClose} className="block rounded-2xl p-3 text-sm font-semibold text-[#F0F0F0] transition hover:bg-[#0C2340]">Our Story</Link>
+            <Link prefetch={false} href="/contact" onClick={onClose} className="block rounded-2xl p-3 text-sm font-semibold text-[#F0F0F0] transition hover:bg-[#0C2340]">Contact</Link>
+            <Link prefetch={false} href="/faq"     onClick={onClose} className="block rounded-2xl p-3 text-sm font-semibold text-[#F0F0F0] transition hover:bg-[#0C2340]">FAQ</Link>
           </div>
         </nav>
       </div>
@@ -87,11 +87,11 @@ export function SiteHeader() {
 
       {/* Mobile */}
       <div className="flex items-center justify-between px-4 py-4 md:hidden">
-        <Link href="/">
+        <Link prefetch={false} href="/">
           <Image src="/images/home/STITCH_DEPOT_LOGO.png" alt="Stitch Depot" height={52} width={52} className="object-contain" />
         </Link>
         <div className="flex items-center gap-3">
-          <Link href="/contact" aria-label="Account" className="text-[#F0F0F0]/60 transition hover:text-[#F0F0F0]">
+          <Link prefetch={false} href="/contact" aria-label="Account" className="text-[#F0F0F0]/60 transition hover:text-[#F0F0F0]">
             <PersonIcon />
           </Link>
           <Link
@@ -115,7 +115,7 @@ export function SiteHeader() {
 
       {/* Desktop */}
       <div className="mx-auto hidden max-w-7xl items-center justify-between px-6 py-4 md:flex">
-        <Link href="/" className="flex items-center gap-3">
+        <Link prefetch={false} href="/" className="flex items-center gap-3">
           <Image src="/images/home/STITCH_DEPOT_LOGO.png" alt="Stitch Depot" height={60} width={60} className="object-contain" />
         </Link>
 
@@ -143,12 +143,12 @@ export function SiteHeader() {
               </div>
             </div>
           </div>
-          <Link href="/about"   className="text-sm font-medium text-[#F0F0F0] hover:text-[#4A90C4]">Our Story</Link>
-          <Link href="/contact" className="text-sm font-medium text-[#F0F0F0] hover:text-[#4A90C4]">Contact</Link>
+          <Link prefetch={false} href="/about"   className="text-sm font-medium text-[#F0F0F0] hover:text-[#4A90C4]">Our Story</Link>
+          <Link prefetch={false} href="/contact" className="text-sm font-medium text-[#F0F0F0] hover:text-[#4A90C4]">Contact</Link>
         </nav>
 
         <div className="flex items-center gap-4">
-          <Link href="/contact" aria-label="Account" className="text-[#F0F0F0]/60 transition hover:text-[#F0F0F0]">
+          <Link prefetch={false} href="/contact" aria-label="Account" className="text-[#F0F0F0]/60 transition hover:text-[#F0F0F0]">
             <PersonIcon />
           </Link>
           <Link
